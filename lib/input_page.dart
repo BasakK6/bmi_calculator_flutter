@@ -1,9 +1,18 @@
 import 'package:bmi_calculator_flutter/reusable_card.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'icon_content.dart';
 
 const double bottomContainerHeight = 80;
 const Color activeCardColor = Color(0xff1D1E33);
+const Color inactiveCardColor = Color(0xff111328);
 const Color bottomContainerColor = Color(0xffEB1555);
+
+enum Gender {
+  male,
+  female,
+}
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -13,6 +22,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender? selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,33 +34,63 @@ class _InputPageState extends State<InputPage> {
         children: [
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
-                    child: ReusableCard(
-                  color: activeCardColor,
-                )),
+                  child: ReusableCard(
+                    onPress: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    color: selectedGender == Gender.male
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    cardChild: const IconContent(
+                      iconData: FontAwesomeIcons.mars,
+                      title: 'MALE',
+                    ),
+                  ),
+                ),
                 Expanded(
-                    child: ReusableCard(
-                  color: activeCardColor,
-                )),
+                  child: ReusableCard(
+                    onPress: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    color: selectedGender == Gender.female
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    cardChild: const IconContent(
+                      iconData: FontAwesomeIcons.venus,
+                      title: 'FEMALE',
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          const Expanded(
-              child: ReusableCard(
-            color: activeCardColor,
-          )),
+          Expanded(
+            child: ReusableCard(
+              color: activeCardColor,
+              cardChild: Container(),
+            ),
+          ),
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
-                    child: ReusableCard(
-                  color: activeCardColor,
-                )),
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    cardChild: Container(),
+                  ),
+                ),
                 Expanded(
-                    child: ReusableCard(
-                  color: activeCardColor,
-                )),
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    cardChild: Container(),
+                  ),
+                ),
               ],
             ),
           ),
