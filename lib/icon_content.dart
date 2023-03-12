@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-const titleTextStyle = TextStyle(fontSize: 18, color: Color(0xff8D8E98));
+import 'package:bmi_calculator_flutter/constants.dart';
 
 class IconContent extends StatelessWidget {
   const IconContent({
@@ -24,7 +23,7 @@ class IconContent extends StatelessWidget {
         const SizedBox(height: 15),
         Text(
           title,
-          style: titleTextStyle,
+          style: kTitleTextStyle,
         ),
       ],
     );
