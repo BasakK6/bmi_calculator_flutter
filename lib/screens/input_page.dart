@@ -1,9 +1,11 @@
-import 'package:bmi_calculator_flutter/reusable_card.dart';
-import 'package:bmi_calculator_flutter/round_icon_button.dart';
+import 'package:bmi_calculator_flutter/components/bottom_button.dart';
+import 'package:bmi_calculator_flutter/screens/results_page.dart';
+import 'package:bmi_calculator_flutter/components/reusable_card.dart';
+import 'package:bmi_calculator_flutter/components/round_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator_flutter/constants.dart';
-import 'icon_content.dart';
+import '../components/icon_content.dart';
 
 enum Gender {
   male,
@@ -78,7 +80,7 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   const Text(
                     "HEIGHT",
-                    style: kTitleTextStyle,
+                    style: kLabelTextStyle,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +93,7 @@ class _InputPageState extends State<InputPage> {
                       ),
                       const Text(
                         "cm",
-                        style: kTitleTextStyle,
+                        style: kLabelTextStyle,
                       ),
                     ],
                   ),
@@ -102,7 +104,7 @@ class _InputPageState extends State<InputPage> {
                         activeTrackColor: Colors.white,
                         thumbColor: const Color(0xffEB1555),
                         thumbShape:
-                        const RoundSliderThumbShape(enabledThumbRadius: 15),
+                            const RoundSliderThumbShape(enabledThumbRadius: 15),
                         overlayShape: const RoundSliderOverlayShape(
                           overlayRadius: 30,
                         )),
@@ -132,7 +134,7 @@ class _InputPageState extends State<InputPage> {
                       children: [
                         const Text(
                           "WEIGHT",
-                          style: kTitleTextStyle,
+                          style: kLabelTextStyle,
                         ),
                         Text(
                           weight.toString(),
@@ -168,55 +170,60 @@ class _InputPageState extends State<InputPage> {
                 ),
                 Expanded(
                   child: ReusableCard(
-                      color: kActiveCardColor,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "AGE",
-                            style: kTitleTextStyle,
-                          ),
-                          Text(
-                            age.toString(),
-                            style: kNumberTextStyle,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RoundIconButton(
-                                iconData: FontAwesomeIcons.minus,
-                                onPressed: () {
-                                  setState(() {
-                                    age--;
-                                  });
-                                },
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              RoundIconButton(
-                                iconData: FontAwesomeIcons.plus,
-                                onPressed: () {
-                                  setState(() {
-                                    age++;
-                                  });
-                                },
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                    color: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "AGE",
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              iconData: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            RoundIconButton(
+                              iconData: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: const EdgeInsets.only(top: 10),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-          )
+          BottomButton(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ResultsPage(),
+                ),
+              );
+            },
+            buttonTitle: "CALCULATE",
+          ),
         ],
       ),
     );
